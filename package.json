@@ -1,0 +1,38 @@
+{
+  "name": "vipps-recurring-woocommerce",
+  "version": "1.0.0",
+  "description": "This plugin provides support for Vipps recurring payments for WooCommerce.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "e2e-test": "./node_modules/.bin/babel-node --presets es2015 tests/e2e/index.js",
+    "docker:down": "npx wc-e2e docker:down",
+    "docker:ssh": "npx wc-e2e docker:ssh",
+    "docker:up": "npx wc-e2e docker:up",
+    "test:e2e": "npx wc-e2e test:e2e",
+    "test:e2e-debug": "npx wc-e2e test:e2e-debug",
+    "test:e2e-dev": "npx wc-e2e test:e2e-dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vippsas/vipps-recurring-woocommerce.git"
+  },
+  "author": "Everyday AS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vippsas/vipps-recurring-woocommerce/issues"
+  },
+  "homepage": "https://github.com/vippsas/vipps-recurring-woocommerce#readme",
+  "dependencies": {
+    "@woocommerce/api": "^0.1.1",
+    "@woocommerce/e2e-environment": "^0.2.0",
+    "@woocommerce/e2e-utils": "^0.1.2",
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "jest": "^26.6.3",
+    "selenium-webdriver": "^4.0.0-alpha.8",
+    "wp-e2e-webdriver": "^0.16.1"
+  }
+}
