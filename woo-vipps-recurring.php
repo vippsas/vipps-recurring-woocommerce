@@ -407,10 +407,19 @@ function woocommerce_gateway_vipps_recurring_init() {
 				$has_subscription_product = false;
 				foreach ( WC()->cart->get_cart_contents() as $values ) {
 					$product = wc_get_product( $values['product_id'] );
+                                        
+                                        //check if Woocommerce All Products for Subscription class_exists
+                                        if ( class_exists('WCS_ATT_Cart') ) {
+                                          // function checks if it is a sub scheme if not then it returns __return_false
+                                          $is_wcs_att_sub = WCS_ATT_Cart::get_subscription_scheme($values);
+                                          //if its a boolean then its not a subscription scheme, so lets do the opposite
+                                          $has_subscription_product = !is_bool($is_wcs_att_sub);
+                                        } else {
+                                          if ( $product->is_type( [ 'subscription', 'variable-subscription' ] ) ) {
+                                                  $has_subscription_product = true;
+                                          }
+                                        }
 
-					if ( $product->is_type( [ 'subscription', 'variable-subscription' ] ) ) {
-						$has_subscription_product = true;
-					}
 				}
 
 				if ( ! $has_subscription_product ) {

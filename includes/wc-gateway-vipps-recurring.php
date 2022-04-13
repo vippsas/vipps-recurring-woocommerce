@@ -1450,7 +1450,14 @@ if ( class_exists( 'WC_Payment_Gateway' ) ) {
 
 				// we can only ever have one subscription as long as 'multiple_subscriptions' is disabled, so we can fetch the first subscription
 				$subscription_items = array_filter( $items, static function ( $item ) {
-					return WC_Subscriptions_Product::is_subscription( $item['product_id'] );
+                                        if ( class_exists('WCS_ATT_Cart') ) {
+                                          // function checks if it is a sub scheme if not then it returns false
+                                          $is_wcs_att_sub = WCS_ATT_Cart::get_subscription_scheme($item);
+                                          //if its a boolean then its not a subscription scheme, so lets do the opposite
+                                          return !is_bool($is_wcs_att_sub);
+                                        } else {
+                                          return WC_Subscriptions_Product::is_subscription( $item['product_id'] );
+                                        }
 				} );
 				$item               = array_pop( $subscription_items );
 				$product            = $item->get_product();
