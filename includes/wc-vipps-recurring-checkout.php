@@ -153,6 +153,35 @@ class WC_Vipps_Recurring_Checkout {
 		add_filter( 'woocommerce_settings_pages', array( $this, 'woocommerce_settings_pages' ) );
 	}
 
+	public function maybe_login_checkout_user( int $order_id, ?string $key = null ) {
+		if ( ! $key ) {
+			return;
+		}
+
+		$order = wc_get_order( $order_id );
+		if ( ! $order ) {
+			return;
+		}
+
+		$order_key_db = $order->get_order_key( 'code' );
+		if ( $order_key_db !== $key ) {
+			return;
+		}
+
+		// Attempt to log the user in
+		$session_auth_token = WC()->session->get( WC_Vipps_Recurring_Helper::SESSION_ORDER_EXPRESS_AUTH_TOKEN );
+		$order_auth_token   = WC_Vipps_Recurring_Helper::get_meta( $order, WC_Vipps_Recurring_Helper::META_ORDER_EXPRESS_AUTH_TOKEN );
+
+		if ( $order_auth_token !== $session_auth_token ) {
+			return;
+		}
+
+		$user = $order->get_user();
+
+		wc_set_customer_auth_cookie( $user->ID );
+		WC()->session->set( WC_Vipps_Recurring_Helper::SESSION_ORDER_EXPRESS_AUTH_TOKEN, null );
+	}
+
 	public function cart_changed() {
 		$pending_order_id = is_a( WC()->session, 'WC_Session' ) ? WC()->session->get( WC_Vipps_Recurring_Helper::SESSION_CHECKOUT_PENDING_ORDER_ID ) : false;
 		$order            = $pending_order_id ? wc_get_order( $pending_order_id ) : null;
@@ -309,6 +338,8 @@ class WC_Vipps_Recurring_Checkout {
 	 * @throws WC_Vipps_Recurring_Config_Exception
 	 */
 	public function shortcode() {
+		global $wp;
+
 		if ( is_admin() || wp_doing_ajax() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
 			return false;
 		}
@@ -316,6 +347,11 @@ class WC_Vipps_Recurring_Checkout {
 		// No point in expanding this unless we are actually doing the checkout. IOK 2021-09-03
 		wc_maybe_define_constant( 'WOOCOMMERCE_CHECKOUT', true );
 		add_filter( 'woo_vipps_recurring_is_vipps_checkout', '__return_true' );
+
+		if ( is_wc_endpoint_url( 'order-received' ) ) {
+			$order_id = absint( $wp->query_vars['order-received'] );
+			$this->maybe_login_checkout_user( $order_id, $_GET['key'] ?? null );
+		}
 
 		// Defer to the normal code for endpoints IOK 2022-12-09
 		if ( is_wc_endpoint_url( 'order-pay' ) || is_wc_endpoint_url( 'order-received' ) ) {
@@ -636,7 +672,7 @@ class WC_Vipps_Recurring_Checkout {
 
 		$order_ids = wc_get_orders( [
 			'meta_key'     => WC_Vipps_Recurring_Helper::META_ORDER_EXPRESS_AUTH_TOKEN,
-			'meta_value'   => wp_hash_password( $authorization_token ),
+			'meta_value'   => $authorization_token,
 			'meta_compare' => '=',
 			'return'       => 'ids'
 		] );
@@ -747,6 +783,8 @@ class WC_Vipps_Recurring_Checkout {
 		}
 
 		// todo: check_charge_status doesn't do it's job properly initially!
+		// todo: throw an error if we try to purchase a product with a location based shipping method?
+		// todo: add a link to an FAQ
 
 		$this->gateway()->check_charge_status( $order_id, true );
 	}
