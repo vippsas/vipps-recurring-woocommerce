@@ -281,8 +281,6 @@ class WC_Gateway_Vipps_Recurring extends WC_Payment_Gateway {
 			return array_merge( $hosts, [
 				// Production servers
 				'api.vipps.no',
-				'api.mobilepay.dk',
-				'api.mobilepay.fi',
 				'pay.vipps.no',
 				'pay.mobilepay.dk',
 				'pay.mobilepay.fi',
