@@ -253,6 +253,8 @@ class WC_Vipps_Recurring {
 			}
 		}
 
+		$this->show_deprecation_warning_or_disable_plugin();
+
 //		$test = $this->gateway()->check_charge_status(931);
 
 		// Show Vipps Login notice for a maximum of 10 days
@@ -272,6 +274,21 @@ class WC_Vipps_Recurring {
 //						'login-promotion'
 //					);
 //				}
+	}
+
+	public function show_deprecation_warning_or_disable_plugin() {
+		$woo_vipps_exists = defined( 'WOO_VIPPS_VERSION' );
+
+		if ( ! $woo_vipps_exists ) {
+			$this->notices->warning( sprintf( '<strong>Deprecation notice!</strong> Vipps/MobilePay recurring payments for WooCommerce\'s functionality has now been included in <strong>Pay with Vipps and MobilePay for WooCommerce</strong>. Please install %s in order to keep receiving updates.', '<a href="https://wordpress.org/plugins/woo-vipps/" target="_blank">Pay with Vipps and MobilePay for WooCommerce</a>' ) );
+
+			return;
+		}
+
+		if ( version_compare( WOO_VIPPS_VERSION, '4.0.0', '>=' )
+			 && WC_VIPPS_RECURRING_MAIN_FILE === 'woo-vipps-recurring.php' ) {
+			deactivate_plugins( plugin_basename( WC_VIPPS_RECURRING_MAIN_FILE ) );
+		}
 	}
 
 	public function gateway(): WC_Gateway_Vipps_Recurring {
