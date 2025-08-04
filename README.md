@@ -12,7 +12,6 @@ END_METADATA -->
 
 ![Support and development by Everyday ](./docs/images/everyday.svg#gh-light-mode-only)![Support and development by Everyday](./docs/images/everyday_dark.svg#gh-dark-mode-only)
 
-
 *This plugin is built and maintained by [Everyday AS](https://everyday.no)
 and can be downloaded from the [WordPress plugin site](https://wordpress.org/plugins/vipps-recurring-payments-gateway-for-woocommerce/).
 For support, use the [support forum on wordpress.org](https://wordpress.org/support/plugin/vipps-recurring-payments-gateway-for-woocommerce/).*
@@ -50,7 +49,7 @@ for an overview.
 * [Extending the plugin](#extending-the-plugin)
   * [Constants](#constants)
   * [Filters](#filters)
-* [Frequently Asked Questions](#frequently-asked-questions)
+* [Frequently asked questions](#frequently-asked-questions)
 <!-- END_COMMENT -->
 
 ## Requirements
@@ -64,20 +63,20 @@ for an overview.
 ## Getting started
 
 * Sign up for a merchant agreement and product order from Vipps MobilePay merchant portal.
-* After 1-2 days, you will get an email with login details to [portal.vippsmobilepay.com](https://portal.vippsmobilepay.com), where you can get the API credentials.
+* After 1–2 days, you will get an email with login details to [portal.vippsmobilepay.com](https://portal.vippsmobilepay.com), where you can get the API credentials.
 * Download and install the plugin.
 * Configure the plugin.
 
 ### Installation
 
 1. Download and activate the plugin from this GitHub repository or [Vipps/MobilePay recurring payments on wordpress.org](https://wordpress.org/plugins/vipps-recurring-payments-gateway-for-woocommerce/)
-2. Enable the *Vipps/MobilePay recurring payment* payment method in WooCommerce: *Settings* > *Payments*.
+2. Enable the *Vipps/MobilePay recurring payment* method in WooCommerce: *Settings* > *Payments*.
 3. Click *Manage* on the payment method.
-4. Proceed to [Retrieving Vipps MobilePay API Keys](#retrieving-vipps-mobilepay-api-keys).
+4. Proceed to [Retrieving Vipps MobilePay API keys](#retrieving-vipps-mobilepay-api-keys).
 
 ![Setup](https://raw.githubusercontent.com/vippsas/vipps-recurring-woocommerce/master/.wordpress-org/screenshot-1.png)
 
-### Retrieving Vipps MobilePay API Keys
+### Retrieving Vipps MobilePay API keys
 
 Log-in to [portal.vippsmobilepay.com/](https://portal.vippsmobilepay.com/) and get your test API keys, as described in
 [API keys](https://developer.vippsmobilepay.com/docs/knowledge-base/api-keys/).
@@ -159,7 +158,7 @@ Some filters include:
 
 `wc_vipps_recurring_process_payment_agreement(WC_Vipps_Agreement $agreement, WC_Subscription $subscription, WC_Order $order)` - Allows you to modify the Vipps MobilePay agreement before we send the request to the Vipps MobilePay API. Includes subscription and order in case you need to make some custom logic.
 
-## Frequently Asked Questions
+## Frequently asked questions
 
 ### How can I get help?
 
@@ -220,7 +219,6 @@ This is because when an order is charged in Vipps MobilePay, it takes 2 days bef
 After 2 days, it will move to the "Processing" status. You can however change the behavior of this by using the "Default status to give pending renewals" option in the plugin settings.
 
 Alternatively, you could look into using WooCommerce "Early renewals": [https://docs.woocommerce.com/document/subscriptions/early-renewal/](https://docs.woocommerce.com/document/subscriptions/early-renewal/) if ensuring the status of a charge is fully completed before a specific date is of utmost importance.
-
 
 ### How do I activate recurring payments in Vipps Checkout on WooCommerce?
 
