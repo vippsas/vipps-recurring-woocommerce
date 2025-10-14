@@ -8,6 +8,15 @@ pagination_prev: null
 ---
 END_METADATA -->
 
+# Deprecation notice
+
+> [!WARNING]  
+> This plugin has been deprecated and merged into [Vipps/MobilePay for WooCommerce](https://github.com/vippsas/vipps-woocommerce).
+> This repository, and the old [WordPress plugin page](https://wordpress.org/plugins/vipps-recurring-payments-gateway-for-woocommerce/) will no longer receive updates.
+> The replacement plugin can be found [here](https://wordpress.org/plugins/woo-vipps/).
+
+The old documentation can be found below. Details may no longer be accurate. Please consult the new repository.
+
 # Vipps/MobilePay recurring payments for WooCommerce
 
 ![Support and development by Everyday ](./docs/images/everyday.svg#gh-light-mode-only)![Support and development by Everyday](./docs/images/everyday_dark.svg#gh-dark-mode-only)

@@ -3,7 +3,7 @@ Contributors: EverydayAS
 Tags: vipps, mobilepay, recurring payments, subscriptions, woocommerce subscriptions
 Requires at least: 5.0
 Tested up to: 6.7
-Stable tag: 2.1.3
+Stable tag: 2.1.3.1
 Requires PHP: 7.4
 License: AGPLv3.0 or later
 License URI: https://www.gnu.org/licenses/agpl-3.0.html
@@ -11,13 +11,19 @@ Vipps/MobilePay recurring payments is perfect if you run a shop with subscriptio
 
 == Description ==
 
+== Deprecation notice ==
+
+This plugin has been deprecated and merged into [Pay with Vipps and MobilePay for WooCommerce](https://wordpress.org/plugins/woo-vipps/).
+
+This plugin will no longer receive updates.
+
+== Vipps/MobilePay recurring payments ==
+
 _Official Vipps/MobilePay recurring payments plugin for WooCommerce. Branded locally as MobilePay in Denmark and Finland, and as Vipps in Norway. One platform gathering more than 11 million users and more than 400.000 merchants across the Nordics. Give your users an easy, fast and familiar shopping experience._
 
 This is the official Vipps/MobilePay recurring payments plugin for WooCommerce. It is owned by [Vipps MobilePay](https://vippsmobilepay.com) and maintained by [Everyday AS](https://everyday.no).
 
 **We encourage you to create an issue here or on the [GitHub page](https://github.com/vippsas/vipps-recurring-woocommerce/issues) if you require assistance or run in to a problem.**
-
-== Vipps/MobilePay recurring payments ==
 
 Vipps/MobilePay recurring payments is perfect for you if you run a web shop with subscription based services or other products that would benefit from subscriptions.
 
